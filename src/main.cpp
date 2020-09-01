@@ -30,6 +30,8 @@ Mat loadFile(const char* filename, const uint_32 datadim = 2)
 
     Mat mat(data.size()/datadim, datadim, CV_32F, data.data());
 
+    cout << mat << endl;
+    
     return mat;
 }
 
@@ -85,7 +87,7 @@ int main(int argc, char** argv)
         RNG rng(12345);
         for(;;)
         {
-            int k, clusterCount = rng.uniform(2, numClusters+1);
+            int k, clusterCount = 5;
             int sampleCount = mypoints.rows;
             Mat labels;
             clusterCount = MIN(clusterCount, sampleCount);
@@ -100,7 +102,7 @@ int main(int argc, char** argv)
             for( uint_32 i = 0; i < sampleCount; i++ )
             {
                 int clusterIdx = labels.at<int>(i);
-                Point ipt = mypoints.at<Point2f>(i);
+                Point ipt(mypoints.at<float>(i), mypoints.at<float>(i));
                 circle( img, ipt, 2, colorTab[clusterIdx], FILLED, LINE_AA );
             }
 
