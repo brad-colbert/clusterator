@@ -13,6 +13,7 @@ Cluster uses the k-means (https://en.wikipedia.org/wiki/K-means_clustering) algo
 
 Current Issues and Thoughts on improvement:
 * (Checked-out and ran again and this wasn't an issue)... The first two entries in the cv::Mat are corrupted after passing by value from the load function.  Something to look into.
+* Should add some checking on the "centers" results to see if they are within the entire data domain.  Given the fixed number of cluster buckets, some centers that have large numbers outside of the domain represent non-clusters.  Simple filter. 
 * K-means requires that you have to define the number of clusters up front.  Not ideal but may fit for resource constrained devices.
 * K-means has to be initialized with random cluster coordinates, resulting in different answers for the same data. Probably not an issue for real world tracking but something to keep in mind if using this for mapping (ie. point clouds or hazard locations will not be in the same pace twice).
 * Should consider using DBSCAN which better handles outliers and does not add them to a cluster as K-means may. (https://en.wikipedia.org/wiki/DBSCAN)
